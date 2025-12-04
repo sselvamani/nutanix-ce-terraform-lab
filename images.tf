@@ -4,6 +4,6 @@ resource "nutanix_image" "ubuntu_2204" {
   image_type = "ISO_IMAGE"
 }
 
-resource "nutanix_image" "win2022_iso" { name = "Win2022"; source_url = "file:///home/youruser/ISOs/Win2022.iso"; image_type = "ISO_IMAGE" }
-resource "nutanix_image" "win10_iso"   { name = "Win10";   source_url = "file:///home/youruser/ISOs/Win10.iso";   image_type = "ISO_IMAGE" }
-resource "nutanix_image" "win11_iso"   { name = "Win11";   source_url = "file:///home/youruser/ISOs/Win11.iso";   image_type = "ISO_IMAGE" }
+// resource "nutanix_image" "win2022_iso" { name = "Win2022"; source_url = "file:///home/youruser/ISOs/Win2022.iso"; image_type = "ISO_IMAGE" }
+// resource "nutanix_image" "win10_iso"   { name = "Win10";   source_url = "file:///home/youruser/ISOs/Win10.iso";   image_type = "ISO_IMAGE" }
+// resource "nutanix_image" "win11_iso"   { name = "Win11";   source_url = "file:///home/youruser/ISOs/Win11.iso";   image_type = "ISO_IMAGE" }
