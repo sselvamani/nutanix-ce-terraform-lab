@@ -1,0 +1,274 @@
+nutanix@NTNX-8c40a2bd-A-CVM:172.16.16.201:~$ ncli cluster get-params | grep -E '(Name|UUID|Version|Nodes|External IP)';
+    Cluster Name              : Selvamani-LAB
+    Cluster Version           : 6.8.1
+    Cluster Full Version      : el8.5-release-fraser-6.8.1-stable-a8aad732dfbfaa2b3bcea0b0c27fbd51d8480f4e
+    External IP address       : 172.16.16.200
+    NCC Version               : ncc-5.0.1
+nutanix@NTNX-8c40a2bd-A-CVM:172.16.16.201:~$ ncli host list;
+
+    Id                        : 000644f1-b66a-ec10-68ba-6c2b59d4da96::5
+    Uuid                      : fd907d43-9841-4bf9-82bd-8a97c3b9fe24
+    Name                      : NTNX-8c40a2bd-A
+    IPMI Address              : 
+    Controller VM Address     : 172.16.16.201
+    Controller VM NAT Address : 
+    Controller VM NAT PORT    : 
+    Hypervisor Address        : 172.16.16.101
+    Hypervisor Version        : Nutanix 20230302.101026
+    Host Status               : NORMAL
+    Oplog Disk Size           : 91.06 GiB (97,776,825,344 bytes) (7.0%)
+    Under Maintenance Mode    : null (-)
+    Metadata store status     : Metadata store enabled on the node
+    Node Position             : Node physical position can't be displayed for this model. Please refer to Prism UI for this information.
+    Node Serial (UUID)        : 5DLZGY2
+    Block Serial (Model)      : 8c40a2bd (CommunityEdition)
+
+    Id                        : 000644f1-b66a-ec10-68ba-6c2b59d4da96::6
+    Uuid                      : fcfd6358-a725-400b-b050-aeb08e32610a
+    Name                      : NTNX-2383b5e9-A
+    IPMI Address              : 
+    Controller VM Address     : 172.16.16.202
+    Controller VM NAT Address : 
+    Controller VM NAT PORT    : 
+    Hypervisor Address        : 172.16.16.102
+    Hypervisor Version        : Nutanix 20230302.101026
+    Host Status               : NORMAL
+    Oplog Disk Size           : 93.78 GiB (100,700,439,552 bytes) (7.1%)
+    Under Maintenance Mode    : null (-)
+    Metadata store status     : Metadata store enabled on the node
+    Node Position             : Node physical position can't be displayed for this model. Please refer to Prism UI for this information.
+    Node Serial (UUID)        : 659VDV2
+    Block Serial (Model)      : 2383b5e9 (CommunityEdition)
+
+    Id                        : 000644f1-b66a-ec10-68ba-6c2b59d4da96::7
+    Uuid                      : 3a660563-26c4-42e2-904a-7841d6c0f421
+    Name                      : NTNX-4d4ae107-A
+    IPMI Address              : 
+    Controller VM Address     : 172.16.16.203
+    Controller VM NAT Address : 
+    Controller VM NAT PORT    : 
+    Hypervisor Address        : 172.16.16.103
+    Hypervisor Version        : Nutanix 20230302.101026
+    Host Status               : NORMAL
+    Oplog Disk Size           : 91.06 GiB (97,776,825,344 bytes) (7.0%)
+    Under Maintenance Mode    : null (-)
+    Metadata store status     : Metadata store enabled on the node
+    Node Position             : Node physical position can't be displayed for this model. Please refer to Prism UI for this information.
+    Node Serial (UUID)        : 658TDV2
+    Block Serial (Model)      : 4d4ae107 (CommunityEdition)
+nutanix@NTNX-8c40a2bd-A-CVM:172.16.16.201:~$ ncli container ls;
+
+    Id                        : 000644f1-b66a-ec10-68ba-6c2b59d4da96::10
+    Uuid                      : 2d9bc15e-9ba5-4650-b3bd-491adce51cdd
+    Name                      : NutanixManagementShare
+    Storage Pool Id           : 000644f1-b66a-ec10-68ba-6c2b59d4da96::8
+    Storage Pool Uuid         : d1caf942-03d9-449c-8bbd-37ff4cd80498
+    Free Space (Physical)     : 3.11 TiB (3,421,669,506,256 bytes)
+    Used Space (Physical)     : 1.59 GiB (1,708,539,904 bytes)
+    Max Capacity (Physical)   : 3.11 TiB (3,423,378,046,160 bytes)
+    Used by others (Physical) : 41.13 GiB (44,159,823,872 bytes)
+    Explicit Res. (Logical)   : 0 bytes
+    Thick Prov. (Logical)     : 0 bytes
+    Replication Factor        : 2
+    Oplog Replication Factor  : 2
+    NFS Whitelist Inherited   : true
+    Container NFS Whitelist   : 
+    VStore Name(s)            : NutanixManagementShare
+    Random I/O Pri Order      : SSD-MEM-NVMe, SSD-PCIe, SSD-SATA, SSD-LowEndurance, DAS-SATA
+    Sequential I/O Pri Order  : SSD-LowEndurance, SSD-PCIe, SSD-SATA, SSD-MEM-NVMe, DAS-SATA
+    Compression               : on
+    Compression Delay         : 0 mins
+    Fingerprint On Write      : off
+    On-Disk Dedup             : off
+    Erasure Code              : off
+    Placement Policy Name     : rf2_default
+    Software Encryption       : off
+
+    Id                        : 000644f1-b66a-ec10-68ba-6c2b59d4da96::1301
+    Uuid                      : aa799df0-1071-4f12-b55e-201def21e78a
+    Name                      : SelfServiceContainer
+    Storage Pool Id           : 000644f1-b66a-ec10-68ba-6c2b59d4da96::8
+    Storage Pool Uuid         : d1caf942-03d9-449c-8bbd-37ff4cd80498
+    Free Space (Physical)     : 3.11 TiB (3,421,669,506,256 bytes)
+    Used Space (Physical)     : 4.14 GiB (4,450,025,472 bytes)
+    Max Capacity (Physical)   : 3.12 TiB (3,426,119,531,728 bytes)
+    Used by others (Physical) : 38.57 GiB (41,418,338,304 bytes)
+    Explicit Res. (Logical)   : 0 bytes
+    Thick Prov. (Logical)     : 0 bytes
+    Replication Factor        : 2
+    Oplog Replication Factor  : 2
+    NFS Whitelist Inherited   : true
+    Container NFS Whitelist   : 
+    VStore Name(s)            : SelfServiceContainer
+    Random I/O Pri Order      : SSD-MEM-NVMe, SSD-PCIe, SSD-SATA, SSD-LowEndurance, DAS-SATA
+    Sequential I/O Pri Order  : SSD-LowEndurance, SSD-PCIe, SSD-SATA, SSD-MEM-NVMe, DAS-SATA
+    Compression               : off
+    Fingerprint On Write      : off
+    On-Disk Dedup             : off
+    Erasure Code              : off
+    Placement Policy Name     : rf2_default
+    Software Encryption       : off
+
+    Id                        : 000644f1-b66a-ec10-68ba-6c2b59d4da96::3653
+    Uuid                      : 779947b6-9fb8-4ffb-b5f0-961b9e90bcf4
+    Name                      : Linux-Servers
+    Storage Pool Id           : 000644f1-b66a-ec10-68ba-6c2b59d4da96::8
+    Storage Pool Uuid         : d1caf942-03d9-449c-8bbd-37ff4cd80498
+    Free Space (Physical)     : 3.11 TiB (3,421,669,506,256 bytes)
+    Used Space (Physical)     : 11.54 GiB (12,390,707,200 bytes)
+    Max Capacity (Physical)   : 3.12 TiB (3,434,060,213,456 bytes)
+    Used by others (Physical) : 31.18 GiB (33,477,656,576 bytes)
+    Explicit Res. (Logical)   : 0 bytes
+    Thick Prov. (Logical)     : 0 bytes
+    Replication Factor        : 2
+    Oplog Replication Factor  : 2
+    NFS Whitelist Inherited   : true
+    Container NFS Whitelist   : 
+    VStore Name(s)            : Linux-Servers
+    Random I/O Pri Order      : SSD-MEM-NVMe, SSD-PCIe, SSD-SATA, SSD-LowEndurance, DAS-SATA
+    Sequential I/O Pri Order  : SSD-LowEndurance, SSD-PCIe, SSD-SATA, SSD-MEM-NVMe, DAS-SATA
+    Compression               : on
+    Compression Delay         : 0 mins
+    Fingerprint On Write      : off
+    On-Disk Dedup             : off
+    Erasure Code              : off
+    Placement Policy Name     : rf2_default
+    Software Encryption       : off
+
+    Id                        : 000644f1-b66a-ec10-68ba-6c2b59d4da96::3774
+    Uuid                      : 73e677f5-67d5-4ee4-b40b-6ead7a6f01ed
+    Name                      : Windows-Servers
+    Storage Pool Id           : 000644f1-b66a-ec10-68ba-6c2b59d4da96::8
+    Storage Pool Uuid         : d1caf942-03d9-449c-8bbd-37ff4cd80498
+    Free Space (Physical)     : 3.11 TiB (3,421,669,506,256 bytes)
+    Used Space (Physical)     : 15.99 GiB (17,171,431,424 bytes)
+    Max Capacity (Physical)   : 3.13 TiB (3,438,840,937,680 bytes)
+    Used by others (Physical) : 26.73 GiB (28,696,932,352 bytes)
+    Explicit Res. (Logical)   : 0 bytes
+    Thick Prov. (Logical)     : 0 bytes
+    Replication Factor        : 2
+    Oplog Replication Factor  : 2
+    NFS Whitelist Inherited   : true
+    Container NFS Whitelist   : 
+    VStore Name(s)            : Windows-Servers
+    Random I/O Pri Order      : SSD-MEM-NVMe, SSD-PCIe, SSD-SATA, SSD-LowEndurance, DAS-SATA
+    Sequential I/O Pri Order  : SSD-LowEndurance, SSD-PCIe, SSD-SATA, SSD-MEM-NVMe, DAS-SATA
+    Compression               : on
+    Compression Delay         : 0 mins
+    Fingerprint On Write      : off
+    On-Disk Dedup             : off
+    Erasure Code              : off
+    Placement Policy Name     : rf2_default
+    Software Encryption       : off
+
+    Id                        : 000644f1-b66a-ec10-68ba-6c2b59d4da96::3776
+    Uuid                      : dbfea931-e369-47b9-8798-d3f0b3f4408e
+    Name                      : Host-Devices
+    Storage Pool Id           : 000644f1-b66a-ec10-68ba-6c2b59d4da96::8
+    Storage Pool Uuid         : d1caf942-03d9-449c-8bbd-37ff4cd80498
+    Free Space (Physical)     : 3.11 TiB (3,421,669,506,256 bytes)
+    Used Space (Physical)     : 0 bytes
+    Max Capacity (Physical)   : 3.11 TiB (3,421,669,506,256 bytes)
+    Used by others (Physical) : 42.72 GiB (45,868,363,776 bytes)
+    Explicit Res. (Logical)   : 0 bytes
+    Thick Prov. (Logical)     : 0 bytes
+    Replication Factor        : 2
+    Oplog Replication Factor  : 2
+    NFS Whitelist Inherited   : true
+    Container NFS Whitelist   : 
+    VStore Name(s)            : Host-Devices
+    Random I/O Pri Order      : SSD-MEM-NVMe, SSD-PCIe, SSD-SATA, SSD-LowEndurance, DAS-SATA
+    Sequential I/O Pri Order  : SSD-LowEndurance, SSD-PCIe, SSD-SATA, SSD-MEM-NVMe, DAS-SATA
+    Compression               : on
+    Compression Delay         : 0 mins
+    Fingerprint On Write      : off
+    On-Disk Dedup             : off
+    Erasure Code              : off
+    Placement Policy Name     : rf2_default
+    Software Encryption       : off
+
+    Id                        : 000644f1-b66a-ec10-68ba-6c2b59d4da96::3797
+    Uuid                      : bfdb4743-ecc4-4496-a362-a7426c16516c
+    Name                      : DataBase-Servers
+    Storage Pool Id           : 000644f1-b66a-ec10-68ba-6c2b59d4da96::8
+    Storage Pool Uuid         : d1caf942-03d9-449c-8bbd-37ff4cd80498
+    Free Space (Physical)     : 3.11 TiB (3,421,669,506,256 bytes)
+    Used Space (Physical)     : 0 bytes
+    Max Capacity (Physical)   : 3.11 TiB (3,421,669,506,256 bytes)
+    Used by others (Physical) : 42.72 GiB (45,868,363,776 bytes)
+    Explicit Res. (Logical)   : 0 bytes
+    Thick Prov. (Logical)     : 0 bytes
+    Replication Factor        : 2
+    Oplog Replication Factor  : 2
+    NFS Whitelist Inherited   : true
+    Container NFS Whitelist   : 
+    VStore Name(s)            : DataBase-Servers
+    Random I/O Pri Order      : SSD-MEM-NVMe, SSD-PCIe, SSD-SATA, SSD-LowEndurance, DAS-SATA
+    Sequential I/O Pri Order  : SSD-LowEndurance, SSD-PCIe, SSD-SATA, SSD-MEM-NVMe, DAS-SATA
+    Compression               : on
+    Compression Delay         : 0 mins
+    Fingerprint On Write      : off
+    On-Disk Dedup             : off
+    Erasure Code              : off
+    Placement Policy Name     : rf2_default
+    Software Encryption       : off
+
+    Id                        : 000644f1-b66a-ec10-68ba-6c2b59d4da96::9
+    Uuid                      : ceb6ac22-7c70-4c14-b654-e86dbf2245b5
+    Name                      : default-container-89056909022813
+    Storage Pool Id           : 000644f1-b66a-ec10-68ba-6c2b59d4da96::8
+    Storage Pool Uuid         : d1caf942-03d9-449c-8bbd-37ff4cd80498
+    Free Space (Physical)     : 3.11 TiB (3,421,669,506,256 bytes)
+    Used Space (Physical)     : 9.45 GiB (10,147,659,776 bytes)
+    Max Capacity (Physical)   : 3.12 TiB (3,431,817,166,032 bytes)
+    Used by others (Physical) : 33.27 GiB (35,720,704,000 bytes)
+    Explicit Res. (Logical)   : 0 bytes
+    Thick Prov. (Logical)     : 0 bytes
+    Replication Factor        : 2
+    Oplog Replication Factor  : 2
+    NFS Whitelist Inherited   : true
+    Container NFS Whitelist   : 
+    VStore Name(s)            : default-container-89056909022813
+    Random I/O Pri Order      : SSD-MEM-NVMe, SSD-PCIe, SSD-SATA, SSD-LowEndurance, DAS-SATA
+    Sequential I/O Pri Order  : SSD-LowEndurance, SSD-PCIe, SSD-SATA, SSD-MEM-NVMe, DAS-SATA
+    Compression               : off
+    Fingerprint On Write      : off
+    On-Disk Dedup             : off
+    Erasure Code              : off
+    Placement Policy Name     : rf2_default
+    Software Encryption       : off
+nutanix@NTNX-8c40a2bd-A-CVM:172.16.16.201:~$ ncli snapshot ls;
+    [None]
+nutanix@NTNX-8c40a2bd-A-CVM:172.16.16.201:~$ ncli category-key list;
+Error: Invalid Command 'category-key list'
+Error: Invalid Entity 'category-key'
+nutanix@NTNX-8c40a2bd-A-CVM:172.16.16.201:~$ acli vm.list;
+VM name   VM UUID                               
+Linux008  c5e4872e-4063-4c97-ae29-e2c2df1871ea  
+Linux009  1cad200d-6ce1-4c08-9007-ac76d4b9a5a6  
+Linux01   03c8851b-0747-4627-8a95-d500504054f8  
+Linux010  7478304b-0f15-4139-a54f-0f1c23d046c1  
+Linux011  d8390fc5-aaad-44dc-a6a2-57169a1d3f45  
+Linux02   2a88124c-d958-49c2-9eae-89096ecec336  
+Linux03   2c2ede01-5445-4434-babb-1525a0e95206  
+Linux04   9e951eee-db5e-41cc-87c0-a75ba4a346ed  
+Linux05   5c5b8655-4e72-4f7a-8333-79d962a5ce0a  
+Linux06   6b265114-8648-4a7e-b0e1-42dae272d8c7  
+Linux07   5d1d3745-114a-4fdd-9b0f-5f6ddda3fe76  
+WIN01     87f6dffe-d0b9-4e37-a792-a5d1353d8d20  
+tiny01    3fc68adc-9f7d-4438-89b3-fd1a2b126ab4  
+nutanix@NTNX-8c40a2bd-A-CVM:172.16.16.201:~$ acli net.list;
+Network name     Network UUID                          Type      Identifier  Virtual Switch  Subnet         
+10.10.10.0/24    0e3f3837-98cb-4bd4-8781-5068fcaed18f  kBridged  10          vs0             10.10.10.0/24  
+Home_Network     40f4d1a9-f9cf-4edc-ac81-ad0b70437237  kBridged  0           vs0                            
+LinuxServers     847c3b59-96bf-4cae-972b-33f9d2c8bbd8  kBridged  20          vs0             10.10.20.0/24  
+Windows_Servers  9978f919-f36b-4c9f-85c7-41df20de9898  kBridged  30          vs0             10.10.30.0/24  
+nutanix@NTNX-8c40a2bd-A-CVM:172.16.16.201:~$ acli image.list;
+Image name            Image type  Image UUID                            
+Drivers               kDiskImage  60b32be8-ae70-414b-932f-6076daae25ec  
+UbuntuServer24.04LTS  kIsoImage   c759f99a-09b9-45c8-9e5d-118afe20c7db  
+WinServer2022         kIsoImage   ceb7398d-8fcd-4dfa-9e1d-d3956b32a0d4  
+alpine                kIsoImage   a29242dc-86fd-4fc0-b1ff-8e55330bd226  
+tinylinux             kIsoImage   9a18ea6f-89cc-424f-a249-f3be83ed00a1  
+nutanix@NTNX-8c40a2bd-A-CVM:172.16.16.201:~$ 
+
