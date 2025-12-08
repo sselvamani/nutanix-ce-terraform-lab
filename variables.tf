@@ -1,28 +1,19 @@
 variable "cluster_vip" {
-  description = "Nutanix Cluster VIP or CVM IP"
+  description = "Nutanix Cluster VIP"
   type        = string
   default     = "172.16.16.200"
 }
 
 variable "nutanix_password" {
-  description = "Nutanix admin password (set in terraform.tfvars)"
+  description = "Nutanix admin password"
   type        = string
   sensitive   = true
-  default     = "" # Empty – override in tfvars for security
+  default     = "" 
 }
 
-variable "containers" {
-  description = "Storage containers with GB sizes"
-  type        = map(number)
-  default = {
-    "Linux-Servers"   = 500 # GB
-    "Windows-Servers" = 500
-    "Sec-Lab"         = 100
-  }
-}
-
+# Subnet Definitions
 variable "subnets" {
-  description = "VLAN subnets with DHCP and internet access control"
+  description = "VLAN subnets configuration"
   type = map(object({
     vlan_id    = number
     cidr       = string
@@ -32,10 +23,11 @@ variable "subnets" {
     internet   = bool
   }))
   default = {
+    # VLAN 20: Explicitly set for INTERNET ALWAYS
     "LinuxServers" = {
       vlan_id    = 20
       cidr       = "10.10.20.0/24"
-      gateway    = "10.10.20.1"
+      gateway    = "10.10.20.1"   # <--- Ensure your Physical Router has this IP!
       dhcp_start = "10.10.20.50"
       dhcp_end   = "10.10.20.99"
       internet   = true
@@ -57,4 +49,19 @@ variable "subnets" {
       internet   = false
     }
   }
+}
+
+variable "containers" {
+  default = {
+    "Linux-Servers"   = 500
+    "Windows-Servers" = 500
+    "Sec-Lab"         = 100
+  }
+}
+
+variable "vm_password" {
+  description = "Password for the Ubuntu VM user"
+  type        = string
+  sensitive   = true
+  default     = "nutanix/4u" # Default for lab; override with -var or terraform.tfvars
 }

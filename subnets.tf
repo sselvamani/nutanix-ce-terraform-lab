@@ -13,8 +13,10 @@ resource "nutanix_subnet" "lab_subnets" {
   default_gateway_ip = each.value.gateway
   prefix_length      = split("/", each.value.cidr)[1]
 
-  # Correct v1.9.5 Syntax: Top-level arguments, NO blocks
+  # FORCE INTERNET DNS: Google & Cloudflare
   dhcp_domain_name_server_list = ["8.8.8.8", "1.1.1.1"]
   dhcp_domain_search_list      = ["lab.local"]
+  
+  # IPAM Pool
   ip_config_pool_list_ranges   = ["${each.value.dhcp_start} ${each.value.dhcp_end}"]
 }

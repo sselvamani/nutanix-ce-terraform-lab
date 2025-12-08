@@ -3,18 +3,19 @@ hostname: ubuntu-terraform-lite
 fqdn: ubuntu-terraform-lite.lab.local
 manage_etc_hosts: true
 
+# Template: Use Terraform Variable
+chpasswd:
+  list: |
+    ubuntu:${vm_password}
+  expire: False
+
 users:
   - name: ubuntu
-    gecos: Ubuntu User
     sudo: ALL=(ALL) NOPASSWD:ALL
     groups: users, admin, wheel
     shell: /bin/bash
     lock_passwd: false
-    # Default password is "nutanix/4u"
-    passwd: $6$rounds=4096$MySecretSalt$1k.G8G8.G8G8.G8G8.G8G8.G8G8.G8G8.G8G8.G8G8.G8G8.G8G8
-    ssh_authorized_keys:
-      # - ssh-rsa YOUR_PUBLIC_KEY_HERE
-  
+
 package_update: true
 package_upgrade: true
 
