@@ -17,7 +17,7 @@ variable "containers" {
   default = {
     "Linux-Servers"   = 500 # GB
     "Windows-Servers" = 500
-    "Sec_Lab"         = 100
+    "Sec-Lab"         = 100
   }
 }
 
@@ -48,7 +48,7 @@ variable "subnets" {
       dhcp_end   = "10.10.30.99"
       internet   = true
     }
-    "Sec_Lab" = {
+    "Sec-Lab" = {
       vlan_id    = 75
       cidr       = "10.10.75.0/24"
       gateway    = "10.10.75.1"
