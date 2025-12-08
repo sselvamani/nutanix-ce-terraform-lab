@@ -65,3 +65,10 @@ variable "vm_password" {
   sensitive   = true
   default     = "nutanix/4u" # Default for lab; override with -var or terraform.tfvars
 }
+
+variable "vm_password" {
+  description = "Password for the Ubuntu VM user"
+  type        = string
+  sensitive   = true
+  # No default value here! Use terraform.tfvars instead.
+}
