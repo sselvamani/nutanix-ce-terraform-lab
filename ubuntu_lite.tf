@@ -8,13 +8,16 @@ resource "nutanix_virtual_machine" "ubuntu_lite" {
 
   # Disk 1: Clone from Image (The OS Disk)
   disk_list {
-    data_source_reference {
+    # FIX: Use '=' for data_source_reference (Required for v1.9.5)
+    data_source_reference = {
       kind = "image"
       uuid = nutanix_image.ubuntu_2204.id
     }
+
     device_properties {
       device_type = "DISK"
-      disk_address {
+      # FIX: Use '=' for disk_address
+      disk_address = {
         device_index = 0
         adapter_type = "SCSI"
       }
@@ -26,7 +29,8 @@ resource "nutanix_virtual_machine" "ubuntu_lite" {
     disk_size_mib = 40960
     device_properties {
       device_type = "DISK"
-      disk_address {
+      # FIX: Use '=' for disk_address
+      disk_address = {
         device_index = 1
         adapter_type = "SCSI"
       }
