@@ -15,7 +15,8 @@ resource "nutanix_virtual_machine" "ubuntu_lite" {
   }
   disk_list { disk_size_mib = 40 * 1024 }
 
-  nic_list { subnet_uuid = nutanix_subnet.lab_subnets["Linux_Servers"].id }
+# NEW (Correct):
+  nic_list { subnet_uuid = nutanix_subnet.lab_subnets["LinuxServers"].id }
 
   guest_customization_cloud_init_user_data = base64encode(file("${path.module}/../cloud-init/ubuntu-cloud-init.yml"))
 }
