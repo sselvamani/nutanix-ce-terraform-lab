@@ -1,0 +1,31 @@
+#cloud-config
+hostname: ubuntu-terraform-lite
+fqdn: ubuntu-terraform-lite.lab.local
+manage_etc_hosts: true
+
+users:
+  - name: ubuntu
+    gecos: Ubuntu User
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    groups: users, admin, wheel
+    shell: /bin/bash
+    lock_passwd: false
+    # Default password is "nutanix/4u" - CHANGE THIS in production
+    passwd: $6$rounds=4096$MySecretSalt$1k./.../
+    ssh_authorized_keys:
+      # Add your actual SSH public key here later
+      - ssh-rsa AAAAB3NzaC1yc2E... user@host
+
+package_update: true
+package_upgrade: true
+
+packages:
+  - qemu-guest-agent
+  - net-tools
+  - curl
+
+runcmd:
+  - systemctl enable qemu-guest-agent
+  - systemctl start qemu-guest-agent
+
+final_message: "The system is finally up, after $UPTIME seconds"
