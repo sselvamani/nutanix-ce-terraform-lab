@@ -46,16 +46,29 @@ terraform plan
 terraform apply -auto-approve
 
 ## Folder structure 
-├── provider.tf
-├── variables.tf
-├── storage_containers.tf
-├── subnets.tf
+.
+├── cloud-init
+│   ├── clone-ubuntu.tftpl
+│   ├── ubuntu-cloud-init.yaml
+│   └── ubuntu-cloud-init.yml
+├── cluster-inventory-20251204.txt
+├── flow_microsegmentation.tf
 ├── images.tf
-├── vms/
-│   ├── ubuntu_lite.tf
-│   ├── windows_2022.tf
-│   ├── windows_10.tf
-│   ├── windows_11.tf
-│   ├── snapshots.tf
-│   └── clones.tf
-└── cloud-init/
+├── outputs.tf
+├── provider.tf
+├── README.md
+├── screenshots
+├── subnets.tf
+├── terraform.tfstate
+├── terraform.tfstate.backup
+├── terraform.tfvars
+├── ubuntu_lite.tf
+├── variables.tf
+├── versions.tf
+└── vms
+    ├── clones.tf
+    ├── snapshots.tf
+    ├── windows_10.tf
+    ├── windows_11.tf
+    └── windows_2022.tf
+
