@@ -43,32 +43,6 @@ git clone https://github.com/sselvamani/nutanix-ce-terraform-lab.git
 cd nutanix-ce-terraform-lab
 terraform init
 terraform plan
-terraform apply -auto-approve
+terraform apply
 
-## Folder structure 
-.
-├── cloud-init
-│   ├── clone-ubuntu.tftpl
-│   ├── ubuntu-cloud-init.yaml
-│   └── ubuntu-cloud-init.yml
-├── cluster-inventory-20251204.txt
-├── flow_microsegmentation.tf
-├── images.tf
-├── outputs.tf
-├── provider.tf
-├── README.md
-├── screenshots
-├── subnets.tf
-├── terraform.tfstate
-├── terraform.tfstate.backup
-├── terraform.tfvars
-├── ubuntu_lite.tf
-├── variables.tf
-├── versions.tf
-└── vms
-    ├── clones.tf
-    ├── snapshots.tf
-    ├── windows_10.tf
-    ├── windows_11.tf
-    └── windows_2022.tf
 
