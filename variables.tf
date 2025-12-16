@@ -48,3 +48,19 @@ variable "subnets" {
     }
   }
 }
+
+# --- Storage Container UUIDs (Manually collected) ---
+variable "sc_linux_uuid" {
+  description = "UUID for LinuxServers Storage Container"
+  type        = string
+}
+
+variable "sc_windows_uuid" {
+  description = "UUID for WindowsServers Storage Container"
+  type        = string
+}
+
+variable "sc_tiny_uuid" {
+  description = "UUID for TinyHosts Storage Container"
+  type        = string
+}

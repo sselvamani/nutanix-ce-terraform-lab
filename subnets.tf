@@ -13,11 +13,10 @@ resource "nutanix_subnet" "lab_subnets" {
   default_gateway_ip   = each.value.gateway
   prefix_length        = split("/", each.value.cidr)[1]
 
-  # DNS & Domain Settings
+  # DHCP Options (Fixed: Removed invalid 'domain_name' argument)
   dhcp_domain_name_server_list = ["172.22.22.222", "8.8.8.8"]
   dhcp_domain_search_list      = ["selva.loc"]
-  domain_name                  = "selva.loc"
 
-  # IP Address Pool
+  # IPAM Pool
   ip_config_pool_list_ranges   = ["${each.value.start} ${each.value.end}"]
 }
