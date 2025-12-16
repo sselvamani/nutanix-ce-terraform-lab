@@ -17,19 +17,13 @@ resource "nutanix_virtual_machine" "ubuntu22" {
     # 20GB Data Disk
     disk_size_mib = 20480
     
-    # Needs '=' (Argument)
+    # Needs '='
     data_source_reference = {
       kind = "image"
       uuid = nutanix_image.ubuntu_22.id
     }
     
-    storage_config {
-      # No '=' (Block)
-      storage_container_reference {
-        kind = "storage_container"
-        uuid = var.sc_linux_uuid
-      }
-    }
+    # FIX: Removed explicit storage_container_reference to allow cloning
   }
 
   nic_list {
@@ -50,19 +44,12 @@ resource "nutanix_virtual_machine" "ubuntu24" {
   disk_list {
     disk_size_mib = 20480
     
-    # Needs '='
     data_source_reference = {
       kind = "image"
       uuid = nutanix_image.ubuntu_24.id
     }
     
-    storage_config {
-      # No '='
-      storage_container_reference {
-        kind = "storage_container"
-        uuid = var.sc_linux_uuid
-      }
-    }
+    # FIX: Removed explicit storage_container_reference
   }
 
   nic_list {
@@ -82,7 +69,6 @@ resource "nutanix_virtual_machine" "windows2022" {
 
   # Disk 1: CDROM (The ISO)
   disk_list {
-    # No '='
     device_properties {
       device_type = "CDROM"
       disk_address = {
@@ -90,24 +76,21 @@ resource "nutanix_virtual_machine" "windows2022" {
         device_index = 0
       }
     }
-    # Needs '='
     data_source_reference = {
       kind = "image"
       uuid = data.nutanix_image.win2022.id
     }
   }
 
-  # Disk 2: C Drive (60GB)
+  # Disk 2: C Drive (60GB) - This works because it is an EMPTY DISK
   disk_list {
     disk_size_mib = 61440
     
-    # No '='
     device_properties {
       device_type = "DISK"
     }
     
     storage_config {
-      # No '='
       storage_container_reference {
         kind = "storage_container"
         uuid = var.sc_windows_uuid
@@ -132,7 +115,6 @@ resource "nutanix_virtual_machine" "tinycore" {
 
   # Disk 1: CDROM (The ISO)
   disk_list {
-    # No '='
     device_properties {
       device_type = "CDROM"
       disk_address = {
@@ -140,24 +122,21 @@ resource "nutanix_virtual_machine" "tinycore" {
         device_index = 0
       }
     }
-    # Needs '='
     data_source_reference = {
       kind = "image"
       uuid = nutanix_image.tinycore.id
     }
   }
 
-  # Disk 2: Data Disk (2GB)
+  # Disk 2: Data Disk (2GB) - Works because it is EMPTY
   disk_list {
     disk_size_mib = 2048
     
-    # No '='
     device_properties {
       device_type = "DISK"
     }
     
     storage_config {
-      # No '='
       storage_container_reference {
         kind = "storage_container"
         uuid = var.sc_tiny_uuid
@@ -184,19 +163,12 @@ resource "nutanix_virtual_machine" "alpine" {
   disk_list {
     disk_size_mib = 1024
     
-    # Needs '='
     data_source_reference = {
       kind = "image"
       uuid = nutanix_image.alpine.id
     }
     
-    storage_config {
-      # No '='
-      storage_container_reference {
-        kind = "storage_container"
-        uuid = var.sc_tiny_uuid
-      }
-    }
+    # FIX: Removed explicit storage_container_reference
   }
 
   nic_list {
