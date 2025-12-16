@@ -1,6 +1,6 @@
 # Nutanix CE + Terraform Homelab  
-![Nutanix CE](https://img.shields.io/badge/Nutanix-CE-orange)  ![AHV](https://img.shields.io/badge/Hypervisor-AHV-blue)   ![Terraform](https://img.shields.io/badge/Terraform-7B42BC?logo=terraform&logoColor=white)  ![License](https://img.shields.io/badge/License-MIT-green) ![Self Learner](https://img.shields.io/badge/Learning-Self%20Learner-10B981?logo=bookstack) ![Home Lab](https://img.shields.io/badge/Lab-Home%20Lab-6366F1?logo=proxmox)
-![Self Paced](https://img.shields.io/badge/Mode-Self%20Paced-F59E0B?logo=clockify) ![Expert](https://img.shields.io/badge/Level-Expert-E11D48?logo=starship)
+![Nutanix CE](https://img.shields.io/badge/Nutanix-CE-orange)  ![AHV](https://img.shields.io/badge/Hypervisor-AHV-blue)   ![Terraform](https://img.shields.io/badge/Terraform-7B42BC?logo=terraform&logoColor=white)  ![Self Learner](https://img.shields.io/badge/Learning-Self%20Learner-10B981?logo=bookstack) ![Home Lab](https://img.shields.io/badge/Lab-Home%20Lab-6366F1?logo=proxmox)
+![Self Paced](https://img.shields.io/badge/Mode-Self%20Paced-F59E0B?logo=clockify)  ![License](https://img.shields.io/badge/License-MIT-green)
 
 **Physical 4-node Nutanix Community Edition cluster – 100 % automated with Terraform**
 Real hardware (4 × Dell OptiPlex) • Latest AOS/CE • Cluster VIP `172.16.16.200`
