@@ -64,3 +64,29 @@ variable "sc_tiny_uuid" {
   description = "UUID for TinyHosts Storage Container"
   type        = string
 }
+
+# --- VM COUNTS ---
+
+variable "ubuntu22_count" {
+  description = "Number of Ubuntu 22.04 VMs to deploy"
+  type        = number
+  default     = 2
+}
+
+variable "ubuntu24_count" {
+  description = "Number of Ubuntu 24.04 VMs to deploy"
+  type        = number
+  default     = 2
+}
+
+variable "windows_count" {
+  description = "Number of Windows Server 2022 VMs to deploy"
+  type        = number
+  default     = 1
+}
+
+variable "tiny_count" {
+  description = "Number of TinyCore/Alpine VMs to deploy"
+  type        = number
+  default     = 2
+}

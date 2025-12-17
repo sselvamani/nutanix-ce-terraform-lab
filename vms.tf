@@ -1,100 +1,102 @@
-# --- DATA SOURCE: Find Manually Uploaded Windows ISO ---
-data "nutanix_image" "win2022" {
-  image_name = "WINServer2022"
+# --- DATA SOURCES ---
+
+# 1. NEW: Your Golden Windows Image
+data "nutanix_image" "win_golden" {
+  image_name = "Windows2022-Golden"
 }
 
-# --- 1. UBUNTU 22 (1 vCPU, 1GB RAM, 20GB Disk) ---
+# 2. Ubuntu Images
+data "nutanix_image" "ubuntu22" {
+  image_name = "Ubuntu22-Jammy"
+}
+data "nutanix_image" "ubuntu24" {
+  image_name = "Ubuntu24-Noble"
+}
+
+# 3. Tiny/Alpine Images
+data "nutanix_image" "tinycore" {
+  image_name = "TinyCore-16"
+}
+data "nutanix_image" "alpine" {
+  image_name = "Alpine-3.23"
+}
+
+# --- RESOURCES ---
+
+# 1. UBUNTU 22
 resource "nutanix_virtual_machine" "ubuntu22" {
-  count = 2
+  count = var.ubuntu22_count
   name  = format("Selva-U22-%02d", count.index + 1)
   cluster_uuid = data.nutanix_cluster.cluster.id
-
   num_vcpus_per_socket = 1
   num_sockets          = 1
   memory_size_mib      = 1024
 
+  guest_customization_cloud_init_user_data = base64encode(<<EOF
+#cloud-config
+password: ${var.vm_password}
+chpasswd: { expire: False }
+ssh_pwauth: True
+EOF
+  )
+
   disk_list {
-    # 20GB Data Disk
     disk_size_mib = 20480
-    
-    # Needs '='
     data_source_reference = {
       kind = "image"
-      uuid = nutanix_image.ubuntu_22.id
+      uuid = data.nutanix_image.ubuntu22.id
     }
-    
-    # FIX: Removed explicit storage_container_reference to allow cloning
   }
-
   nic_list {
     subnet_uuid = nutanix_subnet.lab_subnets["LinuxServers"].id
   }
 }
 
-# --- 2. UBUNTU 24 (1 vCPU, 1GB RAM, 20GB Disk) ---
+# 2. UBUNTU 24
 resource "nutanix_virtual_machine" "ubuntu24" {
-  count = 2
+  count = var.ubuntu24_count
   name  = format("Selva-U24-%02d", count.index + 1)
   cluster_uuid = data.nutanix_cluster.cluster.id
-
   num_vcpus_per_socket = 1
   num_sockets          = 1
   memory_size_mib      = 1024
 
+  guest_customization_cloud_init_user_data = base64encode(<<EOF
+#cloud-config
+password: ${var.vm_password}
+chpasswd: { expire: False }
+ssh_pwauth: True
+EOF
+  )
+
   disk_list {
     disk_size_mib = 20480
-    
     data_source_reference = {
       kind = "image"
-      uuid = nutanix_image.ubuntu_24.id
+      uuid = data.nutanix_image.ubuntu24.id
     }
-    
-    # FIX: Removed explicit storage_container_reference
   }
-
   nic_list {
     subnet_uuid = nutanix_subnet.lab_subnets["LinuxServers"].id
   }
 }
 
-# --- 3. WINDOWS SERVER 2022 (2 vCPU, 2GB RAM, 60GB Disk) ---
+# 3. WINDOWS SERVER 2022 (From Golden Image)
 resource "nutanix_virtual_machine" "windows2022" {
-  count = 1
+  count = var.windows_count
   name  = format("Selva-Win2022-%02d", count.index + 1)
   cluster_uuid = data.nutanix_cluster.cluster.id
 
   num_vcpus_per_socket = 1
   num_sockets          = 2
-  memory_size_mib      = 2048
+  memory_size_mib      = 4096 
 
-  # Disk 1: CDROM (The ISO)
-  disk_list {
-    device_properties {
-      device_type = "CDROM"
-      disk_address = {
-        adapter_type = "IDE"
-        device_index = 0
-      }
-    }
-    data_source_reference = {
-      kind = "image"
-      uuid = data.nutanix_image.win2022.id
-    }
-  }
-
-  # Disk 2: C Drive (60GB) - This works because it is an EMPTY DISK
+  # Single Disk: CLONE from your Golden Image
   disk_list {
     disk_size_mib = 61440
-    
-    device_properties {
-      device_type = "DISK"
-    }
-    
-    storage_config {
-      storage_container_reference {
-        kind = "storage_container"
-        uuid = var.sc_windows_uuid
-      }
+    data_source_reference = {
+      kind = "image"
+      uuid = data.nutanix_image.win_golden.id
     }
   }
 
@@ -103,39 +105,28 @@ resource "nutanix_virtual_machine" "windows2022" {
   }
 }
 
-# --- 4. TINY CORE (0.5 vCPU, 0.25GB RAM, 2GB Disk) ---
+# 4. TINY CORE
 resource "nutanix_virtual_machine" "tinycore" {
-  count = 4
+  count = var.tiny_count
   name  = format("Selva-Tiny-%02d", count.index + 1)
   cluster_uuid = data.nutanix_cluster.cluster.id
-
   num_vcpus_per_socket = 1
   num_sockets          = 1 
   memory_size_mib      = 256 
 
-  # Disk 1: CDROM (The ISO)
   disk_list {
     device_properties {
       device_type = "CDROM"
-      disk_address = {
-        adapter_type = "IDE"
-        device_index = 0
-      }
+      disk_address = { adapter_type = "IDE", device_index = 0 }
     }
     data_source_reference = {
       kind = "image"
-      uuid = nutanix_image.tinycore.id
+      uuid = data.nutanix_image.tinycore.id
     }
   }
-
-  # Disk 2: Data Disk (2GB) - Works because it is EMPTY
   disk_list {
     disk_size_mib = 2048
-    
-    device_properties {
-      device_type = "DISK"
-    }
-    
+    device_properties { device_type = "DISK" }
     storage_config {
       storage_container_reference {
         kind = "storage_container"
@@ -143,34 +134,38 @@ resource "nutanix_virtual_machine" "tinycore" {
       }
     }
   }
-
   nic_list {
     subnet_uuid = nutanix_subnet.lab_subnets["TinyHosts"].id
   }
 }
 
-# --- 5. ALPINE LINUX (0.5 vCPU, 512MB RAM, 1GB Disk) ---
+# 5. ALPINE LINUX
 resource "nutanix_virtual_machine" "alpine" {
-  count = 5
+  count = var.tiny_count
   name  = format("Selva-Alpine-%02d", count.index + 1)
   cluster_uuid = data.nutanix_cluster.cluster.id
-
   num_vcpus_per_socket = 1
   num_sockets          = 1
   memory_size_mib      = 512
 
-  # Disk 1: OS (1GB)
+  guest_customization_cloud_init_user_data = base64encode(<<EOF
+#cloud-config
+chpasswd:
+  list: |
+    root:${var.vm_password}
+  expire: False
+ssh_pwauth: True
+disable_root: False
+EOF
+  )
+
   disk_list {
     disk_size_mib = 1024
-    
     data_source_reference = {
       kind = "image"
-      uuid = nutanix_image.alpine.id
+      uuid = data.nutanix_image.alpine.id
     }
-    
-    # FIX: Removed explicit storage_container_reference
   }
-
   nic_list {
     subnet_uuid = nutanix_subnet.lab_subnets["TinyHosts"].id
   }
