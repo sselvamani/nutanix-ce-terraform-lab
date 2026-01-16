@@ -23,5 +23,5 @@ terraform plan
 terraform apply
 
 
-Thankyou !!!! 
+Thankyou !!!
 
